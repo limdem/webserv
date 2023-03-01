@@ -1,0 +1,107 @@
+server {
+	server_name youpi;
+	listen 0.0.0.0:13879;
+
+	root ./YoupiBanane;
+	index index.html;
+
+	allow_methods GET;
+
+	location /put_test {
+		allow_methods PUT;
+		root ./YoupiBanane/put_here;
+		alias tt;
+	}
+
+	location /post_body {
+		allow_methods POST;
+		client_body_buffer_size 100;
+	}
+
+	location /directory {
+		alias pp;
+		allow_methods GET;
+		root YoupiBanane/;
+		index youpi.bad_extension;
+
+	}
+
+	location *.bla {
+		allow_methods POST;
+		cgi_pass test_mac/macos_cgi_tester;
+	}
+}
+
+server {
+	server_name youpi;
+	listen 0.0.0.0:13878;
+
+	root ./YoupiBanane;
+	index index.html;
+
+	allow_methods GET;
+
+	location / {
+		allow_methods GET;
+		root /home/dimitri/Documents/42/webserv/webserv_francois_saver2f/index.html;
+		alias yy;
+		index index.html;
+	}
+
+	location /put_test/* {
+		allow_methods PUT;
+		root /home/dimitri/Téléchargements/webserv_francois;
+		alias yy;
+		cgi_pass php;
+	}
+
+	location *.bla {
+		allow_methods POST;
+		cgi_pass test_mac/macos_cgi_tester;
+	}
+
+	location /post_body {
+		allow_methods POST;
+		client_body_buffer_size 100;
+	}
+
+	location /directory {
+		alias uu;
+		allow_methods GET;
+		root YoupiBanane;
+		index youpi.bad_extension;
+	}
+}
+
+server {
+	server_name youpi;
+	listen 0.0.0.0:13856;
+
+	root ./YoupiBanane;
+	index index.html;
+
+	allow_methods GET;
+
+	location /put_test {
+		allow_methods PUT;
+		root ./YoupiBanane/put_here;
+		alias yy;
+	}
+
+	location /post_body {
+		allow_methods POST;
+		client_body_buffer_size 100;
+	}
+
+	location /directory {
+		alias uu;
+		allow_methods GET POST;
+		root YoupiBanane/;
+		index youpi.bad_extension;
+	}
+
+	location *.bla {
+		allow_methods POST;
+		cgi_pass test_mac/macos_cgi_tester;
+	}
+}

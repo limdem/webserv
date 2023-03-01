@@ -1,0 +1,140 @@
+server {
+	server_name Bonjour;
+	listen 127.0.0.1:13879;
+
+	root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical;
+	index index.html;
+
+	allow_methods GET;
+	client_body_buffer_size 1k;
+
+	error_page 404 /website/static/custom_404.html;
+
+	location / {
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical/website/static;
+		allow_methods GET;
+		index index.html;
+	}
+
+	location /website/static {
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical/website/static;
+		allow_methods GET;
+		client_body_buffer_size 5k;
+		autoindex on;
+	}
+
+	location /website/cgi/test.php {
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical;
+		allow_methods GET;
+		cgi_pass .php;
+	}
+
+	location /website/cgi/get_short1.php {
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical;
+		allow_methods GET;
+		cgi_pass .php;
+	}
+
+	location /website/cgi/get_short.py {
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical;
+		allow_methods GET;
+		cgi_pass .py;
+	}
+
+	location /website/cgi/get_short.pl {
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical;
+		allow_methods GET;
+		cgi_pass .pl;
+	}
+
+	location /website/static/upload.php {
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical/website/static;
+		allow_methods GET POST;
+		client_body_buffer_size 16k;
+		cgi_pass .php;
+		upload_store /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical/test/data;
+	}
+
+	location /website/static/index2.html {
+		allow_methods GET;
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical/website/static;
+		index index2.html;
+		return 301 /website/static/index4.html;
+	}
+
+	location /website/static/index3.html {
+		allow_methods GET;
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical/website/static;
+	}
+
+	location /website/static/index4.html {
+		allow_methods GET;
+	}
+
+	location /website/static/custom_404.html {
+		allow_methods GET;
+	}
+}
+
+server {
+	server_name youpi;
+	listen 127.0.0.1:13878;
+
+	root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservical;
+	index index5.html;
+
+	allow_methods GET;
+
+	location / {
+		allow_methods GET;
+		root /mnt/nfs/homes/rlanani/Downloads/Websereurdefrancoisdimitriryad/webserv/webservicalwebsite/static;
+		index index5.html;
+	}
+
+	location /put_test/* {
+		allow_methods PUT;
+		root /home/dimitri/Téléchargements/webserv_francois;
+		alias yy;
+	}
+
+	location /post_body {
+		allow_methods POST;
+		client_body_buffer_size 100;
+	}
+
+	location /directory {
+		alias uu;
+		allow_methods GET;
+		root YoupiBanane/;
+		index youpi.bad_extension;
+	}
+}
+
+server {
+	server_name youpi;
+	listen 0.0.0.0:13856;
+
+	root ./YoupiBanane;
+	index index.html;
+
+	allow_methods GET;
+
+	location /put_test {
+		allow_methods PUT;
+		root ./YoupiBanane/put_here;
+		alias yy;
+	}
+
+	location /post_body {
+		allow_methods POST;
+		client_body_buffer_size 100;
+	}
+
+	location /directory {
+		alias uu;
+		allow_methods GET;
+		root YoupiBanane/;
+		index youpi.bad_extension;
+	}
+
+}
